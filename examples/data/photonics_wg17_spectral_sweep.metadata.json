@@ -1,0 +1,194 @@
+{
+  "schema_version": "0.1.0-draft.2",
+  "fixture_id": "photonics-wg17-spectral-sweep-v1",
+  "title": "Synthetic WG-17 repeated optical spectral sweep",
+  "data_classification": "synthetic_validation_fixture",
+  "is_empirical_evidence": false,
+  "license": "Apache-2.0",
+  "producer": {
+    "distribution": "scientific-measurement-recorder",
+    "package_version": "0.0.0"
+  },
+  "purpose": [
+    "CSV import mapping",
+    "parsed series candidate construction",
+    "targeted batch confirmation",
+    "named repeat and wavelength coordinates",
+    "linear unit normalization",
+    "xarray-compatible series construction",
+    "repeated-measurement statistics"
+  ],
+  "source": {
+    "observation_id": "3ab1ae3d-8a72-4fc9-9149-5d5dc52a82dc",
+    "source_type": "csv",
+    "path": "photonics_wg17_spectral_sweep.csv",
+    "media_type": "text/csv",
+    "sha256": "a82496bec7335bae1bd8e4b2238467b5e85c671c9691cb1e92375c07f1be69e1",
+    "captured_at": "2026-01-15T10:30:30+00:00",
+    "generation_method": "Hand-authored deterministic synthetic values with a resonance-like transmission dip",
+    "raw_source_must_be_preserved": true
+  },
+  "series_candidate": {
+    "candidate_id": "eb3bcf70-782f-48de-973e-a57af8682970",
+    "candidate_revision": 1,
+    "observation_id": "3ab1ae3d-8a72-4fc9-9149-5d5dc52a82dc",
+    "parsed_at": "2026-01-15T10:31:00+00:00",
+    "parser": {
+      "id": "smr.csv.explicit_mapping",
+      "version": "0.1.0-draft.2"
+    },
+    "source_mapping": {
+      "repeat_index": {
+        "target": "coordinates.repeat",
+        "coordinate_kind": "index"
+      },
+      "wavelength_nm": {
+        "target": "coordinates.wavelength",
+        "coordinate_kind": "physical",
+        "quantity_id": "photonics.optical_wavelength",
+        "unit_lexeme": "nm"
+      },
+      "input_power_mW": {
+        "target": "data_variables.input_power",
+        "quantity_id": "photonics.optical_power",
+        "unit_lexeme": "mW"
+      },
+      "output_power_mW": {
+        "target": "data_variables.output_power",
+        "quantity_id": "photonics.optical_power",
+        "unit_lexeme": "mW"
+      }
+    }
+  },
+  "confirmation": {
+    "confirmation_id": "2b99f89e-aef0-42a4-a7fd-6bce2db97403",
+    "target_type": "series_candidate",
+    "target_id": "eb3bcf70-782f-48de-973e-a57af8682970",
+    "target_revision": 1,
+    "actor_type": "user",
+    "actor_id": "fixture-author",
+    "confirmed_at": "2026-01-15T10:32:00+00:00",
+    "accepted_fields_digest": "d8c52347b83f6b20dc14da895aca47ae74aefc704182ffeb7db1a5674f5d12b4",
+    "is_synthetic": true
+  },
+  "series": {
+    "series_id": "e20ae38f-d51c-42dc-9a99-b3ea7c568f69",
+    "name": "WG-17 spectral sweep",
+    "created_at": "2026-01-15T10:32:01+00:00",
+    "validation_state": "valid",
+    "lifecycle_status": "active",
+    "dimensions": {
+      "repeat": 3,
+      "wavelength": 9
+    },
+    "coordinates": {
+      "repeat": {
+        "column": "repeat_index",
+        "coordinate_kind": "index",
+        "values": [1, 2, 3]
+      },
+      "wavelength": {
+        "column": "wavelength_nm",
+        "coordinate_kind": "physical",
+        "quantity_id": "photonics.optical_wavelength",
+        "original_unit": "nm",
+        "canonical_unit": "m",
+        "selected_conversion_policy": "linear_si",
+        "values": [
+          1548.0,
+          1548.5,
+          1549.0,
+          1549.5,
+          1550.0,
+          1550.5,
+          1551.0,
+          1551.5,
+          1552.0
+        ]
+      }
+    },
+    "data_variables": {
+      "input_power": {
+        "column": "input_power_mW",
+        "dimensions": ["repeat", "wavelength"],
+        "quantity_id": "photonics.optical_power",
+        "original_unit": "mW",
+        "canonical_unit": "W",
+        "selected_conversion_policy": "linear_si"
+      },
+      "output_power": {
+        "column": "output_power_mW",
+        "dimensions": ["repeat", "wavelength"],
+        "quantity_id": "photonics.optical_power",
+        "original_unit": "mW",
+        "canonical_unit": "W",
+        "selected_conversion_policy": "linear_si"
+      }
+    }
+  },
+  "sample": {
+    "sample_id": "WG-17",
+    "sample_type": "photonic_waveguide_test_structure"
+  },
+  "instruments": [
+    {
+      "instrument_id": "TLS-01",
+      "role": "tunable_laser_source",
+      "manufacturer": null,
+      "model": null,
+      "serial_number": null,
+      "calibration_reference": null
+    },
+    {
+      "instrument_id": "OPM-01",
+      "role": "optical_power_meter",
+      "manufacturer": null,
+      "model": null,
+      "serial_number": null,
+      "calibration_reference": null
+    }
+  ],
+  "conditions": {
+    "temperature": {
+      "quantity_id": "environment.temperature",
+      "original_value_lexeme": "24.8",
+      "original_unit_lexeme": "degC",
+      "expected_canonical_value": "297.95",
+      "canonical_unit": "K",
+      "selected_conversion_policy": "temperature_point"
+    },
+    "laser_current": {
+      "quantity_id": "electronics.laser_current",
+      "original_value_lexeme": "80",
+      "original_unit_lexeme": "mA",
+      "expected_canonical_value": "0.08",
+      "canonical_unit": "A",
+      "selected_conversion_policy": "linear_si"
+    },
+    "polarization": {
+      "quantity_id": "photonics.polarization",
+      "value_lexeme": "TE",
+      "selected_conversion_policy": "controlled_text"
+    }
+  },
+  "timestamps": {
+    "observed_at": "2026-01-15T10:30:00+00:00",
+    "timestamps_are_synthetic": true
+  },
+  "derived_variables": {
+    "present_in_raw_csv": false,
+    "permitted_future_derivations": [
+      "transmission = output_power / input_power",
+      "loss_dB = 10 * log10(input_power / output_power)"
+    ],
+    "require_scientific_provenance": true
+  },
+  "expected_checks": {
+    "csv_row_count": 27,
+    "accepted_row_count": 27,
+    "rejected_row_count": 0,
+    "wavelength_1550_nm_canonical_m": "0.000001550",
+    "input_power_2_400_mW_canonical_W": "0.002400"
+  },
+  "notes": "Input/output powers are synthetic. Transmission and loss are derived variables and are never raw observations in this CSV."
+}

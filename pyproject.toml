@@ -1,0 +1,88 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "scientific-measurement-recorder"
+dynamic = ["version"]
+description = "Local-first capture, validation, and preservation of scientific measurements."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = "Apache-2.0"
+authors = [{ name = "Scientific Measurement Recorder contributors" }]
+keywords = ["measurement", "metrology", "scientific-data", "units", "photonics"]
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering",
+]
+dependencies = [
+  "numpy>=1.26,<3",
+  "pandas>=2.2,<4",
+  "pint>=0.24,<1",
+  "pydantic>=2.8,<3",
+  "scipy>=1.13,<2",
+  "typer>=0.12,<1",
+  "xarray>=2024.1,<2027",
+]
+
+[project.optional-dependencies]
+gui = ["PySide6>=6.7,<7"]
+
+[dependency-groups]
+dev = [
+  "jsonschema>=4.23,<5",
+  "mypy>=1.11,<2",
+  "pytest>=8.3,<10",
+  "pytest-cov>=5,<8",
+  "ruff>=0.9,<1",
+]
+
+[project.scripts]
+smr = "smr.cli:app"
+
+[project.urls]
+Documentation = "https://github.com/Ndebt/scientific-measurement-recorder#readme"
+Issues = "https://github.com/Ndebt/scientific-measurement-recorder/issues"
+Source = "https://github.com/Ndebt/scientific-measurement-recorder"
+
+[tool.hatch.version]
+path = "src/smr/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/smr"]
+
+[tool.pytest.ini_options]
+addopts = "--strict-config --strict-markers -ra"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["smr"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 100
+
+[tool.ruff]
+target-version = "py312"
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "A", "C4", "SIM", "RUF"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["smr"]
+
+[tool.uv]
+required-version = "==0.11.33"

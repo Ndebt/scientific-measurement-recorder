@@ -1,0 +1,100 @@
+{
+  "schema_version": "0.1.0",
+  "definition_set_version": "0.1.0-draft.2",
+  "status": "draft",
+  "quantity_definitions": [
+    {
+      "quantity_id": "photonics.optical_wavelength",
+      "display_name": "Optical wavelength",
+      "value_kind": "numeric",
+      "physical_dimension": "[length]",
+      "canonical_unit": "m",
+      "accepted_conversion_policies": ["linear_si"],
+      "constraints": {
+        "domain": "canonical_magnitude",
+        "exclusive_minimum": 0
+      }
+    },
+    {
+      "quantity_id": "photonics.optical_power",
+      "display_name": "Optical power",
+      "value_kind": "numeric",
+      "physical_dimension": "[mass] * [length] ** 2 / [time] ** 3",
+      "canonical_unit": "W",
+      "accepted_conversion_policies": [
+        "linear_si",
+        "log_absolute_power_dbm"
+      ],
+      "constraints": {
+        "domain": "canonical_magnitude",
+        "minimum": 0
+      },
+      "description": "dBm input is absolute logarithmic power referenced to 1 mW and never uses generic linear conversion."
+    },
+    {
+      "quantity_id": "photonics.transmission",
+      "display_name": "Optical power transmission",
+      "value_kind": "numeric_ratio",
+      "physical_dimension": "dimensionless",
+      "canonical_unit": "1",
+      "accepted_conversion_policies": ["linear_ratio"],
+      "constraints": {
+        "domain": "canonical_magnitude",
+        "minimum": 0
+      }
+    },
+    {
+      "quantity_id": "photonics.loss",
+      "display_name": "Optical power-ratio loss",
+      "value_kind": "numeric_logarithmic_power_ratio_loss",
+      "physical_dimension": "dimensionless",
+      "canonical_unit": "dB",
+      "accepted_conversion_policies": ["log_power_ratio_loss_db"],
+      "description": "Power-ratio loss uses loss_dB = 10 * log10(P_in / P_out), not an amplitude-ratio convention."
+    },
+    {
+      "quantity_id": "electronics.laser_current",
+      "display_name": "Laser drive current",
+      "value_kind": "numeric",
+      "physical_dimension": "[current]",
+      "canonical_unit": "A",
+      "accepted_conversion_policies": ["linear_si"]
+    },
+    {
+      "quantity_id": "environment.temperature",
+      "display_name": "Absolute temperature",
+      "value_kind": "numeric",
+      "physical_dimension": "[temperature]",
+      "canonical_unit": "K",
+      "accepted_conversion_policies": ["temperature_point"],
+      "constraints": {
+        "domain": "canonical_magnitude",
+        "minimum": 0
+      }
+    },
+    {
+      "quantity_id": "environment.temperature_interval",
+      "display_name": "Temperature interval",
+      "value_kind": "numeric",
+      "physical_dimension": "[temperature]",
+      "canonical_unit": "K",
+      "accepted_conversion_policies": ["temperature_interval"]
+    },
+    {
+      "quantity_id": "photonics.polarization",
+      "display_name": "Optical polarization",
+      "value_kind": "categorical_controlled_text",
+      "physical_dimension": null,
+      "canonical_unit": null,
+      "accepted_conversion_policies": ["controlled_text"],
+      "allowed_values": [
+        "TE",
+        "TM",
+        "circular_left",
+        "circular_right",
+        "unpolarized",
+        "other"
+      ]
+    }
+  ]
+}
