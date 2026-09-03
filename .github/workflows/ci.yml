@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
+        with:
+          version: "0.11.33"
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+
+      - name: Install Python
+        run: uv python install 3.12
+
+      - name: Verify dependency lock
+        run: uv lock --check
+
+      - name: Synchronize core development environment
+        run: uv sync --locked --dev
+
+      - name: Check formatting
+        run: uv run ruff format --check .
+
+      - name: Lint
+        run: uv run ruff check .
+
+      - name: Type check
+        run: uv run mypy
+
+      - name: Test
+        run: uv run pytest --cov=smr --cov-report=term-missing
+
+      - name: Build distributions
+        run: uv build
+
+      - name: Verify installed wheel import, version, and CLI
+        run: |
+          uv run --isolated --no-project --with ./dist/*.whl python - <<'PY'
+          import importlib.metadata
+          import subprocess
+
+          import smr
+
+          distribution_version = importlib.metadata.version(
+              "scientific-measurement-recorder"
+          )
+          assert smr.__version__ == distribution_version
+          result = subprocess.run(
+              ["smr", "version", "--short"],
+              check=True,
+              capture_output=True,
+              text=True,
+          )
+          assert result.stdout.strip() == distribution_version
+          print(f"wheel smoke test passed: {distribution_version}")
+          PY
