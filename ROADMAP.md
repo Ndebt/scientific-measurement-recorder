@@ -3,7 +3,7 @@
 Milestones are sequential quality gates. Later work may be specified, but its
 implementation does not begin until the current gate closes.
 
-## M0 — Foundation (current)
+## M0 — Foundation (complete)
 
 Goal: establish a trustworthy, installable project shell and freeze enough of
 the scientific contract to begin the core safely.
@@ -31,17 +31,17 @@ Exit criteria:
 - [x] R2 contract and foundation assets are revised in the package workspace.
 - [x] R2 passes Work-environment Python 3.12 lock, core/dev sync, format, lint,
   type, test, build, isolated-wheel import, version, and CLI checks.
-- [ ] R2 package is imported into the owner's local branch.
-- [ ] Owner-local Python 3.12 lock, sync, import, CLI, format, lint, type, test,
+- [x] R2 package is imported into the owner's local branch.
+- [x] Owner-local Python 3.12 lock, sync, import, CLI, format, lint, type, test,
   build, and isolated-wheel checks pass.
-- [ ] The revised branch is pushed.
-- [ ] CI passes for the revised PR.
-- [ ] The foundation PR is reviewed and merged.
-- [ ] `STATE.md` records M0 complete and explicitly opens M1.
+- [x] The revised branch is pushed.
+- [x] CI passes for the revised PR.
+- [x] The foundation PR is reviewed and merged.
+- [x] `STATE.md` records M0 complete and explicitly opens M1.
 
-M1 remains closed.
+M1 is open.
 
-## M1 — Measurement core (closed)
+## M1 — Measurement core (current)
 
 Deliver runtime `MeasurementDraft`, `ParsedCandidate`,
 `ParsedSeriesCandidate`, targeted `Confirmation`, `Measurement`, and
