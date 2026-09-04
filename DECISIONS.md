@@ -242,3 +242,23 @@ Status values are `proposed`, `accepted`, `superseded`, or `rejected`.
   from flat length + explicit shape + ordered named dimensions. Any later
   NumPy/pandas/xarray conversion is an adapter/interoperability concern and must
   preserve the authoritative M1 values and metadata.
+
+## ADR-0018 — Pending state for unresolved interpretation
+
+- **Status:** accepted
+- **Date:** 2026-09-04
+- **Decision:** `pending` is used when validation cannot complete because required
+  interpretation is unresolved and requires explicit user resolution. For M1:
+  `UNIT-002` (`25 C`) is `pending`; `UNIT-003` (`1550 u`) is `pending`;
+  `ARR-003` (mixed-unit raw array requiring explicit pre-normalization) is
+  `pending`. These cases must not silently infer or correct the intended
+  unit/representation. `invalid` remains for deterministic contradictions or
+  failed scientific/schema constraints such as dimensional mismatch, forbidden
+  temperature point/interval interchange, logarithmic semantic misuse,
+  non-finite values, shape mismatch, and failed quantity constraints.
+- **Rationale:** The three cases represent unresolved interpretation rather than
+  a confirmed scientific contradiction. A single deterministic state avoids
+  implementation-dependent behavior while preserving explicit user authority.
+- **Consequences:** Validation tests must expect `pending` for `UNIT-002`,
+  `UNIT-003`, and `ARR-003`. No automatic correction or unit inference may
+  resolve these states.

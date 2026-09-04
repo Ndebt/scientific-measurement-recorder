@@ -41,8 +41,8 @@ The `repeat` coordinate is an index coordinate and intentionally has no
 | DIM-004 | M1 | transmission | `0.8 W` | invalid | dimensional input rejected |
 | DIM-005 | M1 | unknown quantity | `1 m` | pending | `quantity.unknown`; dimension alone does not infer meaning |
 | UNIT-001 | M1 | optical wavelength | value `1550`, unit absent | pending | `unit.missing`; no invented `nm` |
-| UNIT-002 | M1 | temperature point | `25 C` | pending/invalid | `unit.ambiguous_alias`; require explicit `degC` or `K` |
-| UNIT-003 | M1 | optical wavelength | `1550 u` | pending/invalid | unknown/ambiguous unit; no inferred `µm` |
+| UNIT-002 | M1 | temperature point | `25 C` | pending | `unit.ambiguous_alias`; require explicit `degC` or `K` |
+| UNIT-003 | M1 | optical wavelength | `1550 u` | pending | unknown/ambiguous unit; no inferred `µm` |
 | UNIT-004 | M1 | optical power | `2.4 milliwatt` | valid; `0.0024 W` | Pint long name accepted; original spelling retained |
 | UNIT-005 | M1 | optical wavelength | `1 meter` | valid; `1 m` | canonical symbol stored separately |
 | TEMP-001 | M1 | temperature point | `25 degC` | valid; `298.15 K` | offset-aware `temperature_point`; exact declared decimal |
@@ -58,7 +58,7 @@ The `repeat` coordinate is an index coordinate and intentionally has no
 | LOG-006 | M1 | optical loss | `3 dBm` | invalid | absolute log power is not a loss ratio |
 | ARR-001 | M1 | wavelength coordinate | `[1550, 1551] nm` | valid; `[1.55e-6, 1.551e-6] m` | element order/shape and raw source retained |
 | ARR-002 | M1 | optical power | `[2.4, 2.5, 2.6] mW` | valid; `[0.0024, 0.0025, 0.0026] W` | homogeneous unit |
-| ARR-003 | M1 | optical power | `[2.4 mW, 0.0025 W]` in one raw array | pending/invalid in v0.1 | explicit pre-normalization required; raw source retained |
+| ARR-003 | M1 | optical power | `[2.4 mW, 0.0025 W]` in one raw array | pending in v0.1 | explicit pre-normalization required; raw source retained |
 | ARR-004 | M1 | series dimensions | coordinate length 3, variable shape 4 | invalid | `series.shape_mismatch` |
 | ARR-005 | M1 | numeric array | `[1.0, NaN] mW` | invalid by default | issue identifies index; no dropped element |
 | RAW-001 | M1 | wavelength | `1.5500e3 nm` | valid; `1.55e-6 m` | exact value lexeme `1.5500e3` survives normalization |
