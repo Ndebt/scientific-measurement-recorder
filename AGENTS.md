@@ -105,8 +105,8 @@ uv build
 GUI dependencies are not installed in M0/M1 quality paths. M4 owns a dedicated
 `gui` extra job.
 
-## Current gate
+## Milestone state
 
-M0 is open and M1 is CLOSED. Do not add runtime `Measurement`,
-`MeasurementSeries`, quantity-registry, storage, statistics, or GUI modules until
-M0 exit criteria are satisfied and `STATE.md` explicitly opens M1.
+Current transient milestone state must be read from `STATE.md`. Milestone scope
+and gates must be read from `ROADMAP.md`. `AGENTS.md` must not duplicate
+hard-coded milestone-open/closed state.

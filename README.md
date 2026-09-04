@@ -4,10 +4,9 @@ Scientific Measurement Recorder (SMR) is an open-source, local-first application
 for capturing, validating, preserving, analyzing, and exporting scientific
 measurements without losing their original context.
 
-> **Status: M0 foundation, Revision Round 2.** Only the installable package shell
-> and version CLI exist. Measurement APIs shown below are design targets and do
-> not run yet. M1 remains closed until the foundation PR passes CI, is reviewed,
-> and is merged.
+> **Status: M0 foundation complete. M1 Measurement Core is current and open.**
+> The installable package shell and version CLI exist. Runtime measurement APIs
+> shown below are still under implementation.
 
 ## Why
 
