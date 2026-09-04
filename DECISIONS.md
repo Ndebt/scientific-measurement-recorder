@@ -210,3 +210,35 @@ Status values are `proposed`, `accepted`, `superseded`, or `rejected`.
   permits silent divergence.
 - **Consequences:** Release changes update only `_version.py`; build and smoke
   tests must prove wheel metadata and `smr.__version__` agree.
+
+## ADR-0017 — Decimal numeric domain representation
+
+- **Status:** accepted
+- **Date:** 2026-09-04
+- **Decision:** Exact source, value, and unit lexemes remain immutable strings
+  and are never reconstructed from numeric values. M1 scalar parsed and
+  canonical numeric domain values use Python `decimal.Decimal`. Decimal
+  arithmetic uses an SMR-owned deterministic context/policy rather than ambient
+  process defaults. M1 authoritative series numeric values use a flat immutable
+  `tuple[Decimal, ...]` together with an explicit shape and ordered named
+  dimensions. Multi-dimensional flattening order is deterministic C-order /
+  row-major. Raw array/file/source evidence remains separate and unchanged.
+  NumPy, pandas, and xarray objects are not authoritative M1 domain
+  representations. M1 does not define the M2 lossless JSON/export serialization
+  contract. M1 may define only the minimum deterministic content representation
+  required for candidate/confirmation digests and reproducible validation.
+  Non-finite numeric values are invalid by default, consistent with `SPEC.md`
+  and the M1 validation matrix.
+- **Rationale:** Decimal avoids binary floating-point representation error for
+  declared exact decimal cases while preserving a strict separation between
+  lexical evidence and numeric interpretation. Flat immutable storage plus
+  explicit shape and named dimensions preserves order and shape deterministically
+  without coupling the core domain model to NumPy/xarray. This keeps M2
+  persistence/export/interoperability responsibilities out of M1.
+- **Consequences:** Pint integration in M1 must operate compatibly with Decimal
+  and must not silently coerce authoritative values to binary float. Scalar and
+  series normalization tests must verify Decimal results where exact decimal
+  outcomes are declared. Series shape validation reconstructs logical dimensions
+  from flat length + explicit shape + ordered named dimensions. Any later
+  NumPy/pandas/xarray conversion is an adapter/interoperability concern and must
+  preserve the authoritative M1 values and metadata.
